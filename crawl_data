@@ -1,0 +1,29 @@
+import requests
+import json
+
+
+def get_home_collections(lat=10, long=106):
+    url = "https://gw.be.com.vn/api/v1/be-merchant-gateway/web/customer/get_home_collections"
+
+    payload = json.dumps({
+      "locale": "vi",
+      "client_info": {
+        "locale": "vi",
+        "device_type": 3
+      },
+      "latitude": lat,
+      "longitude": long
+      
+    })
+
+    headers = {
+      'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjowLCJhdWQiOiJndWVzdCIsImV4cCI6MTc0NTgwMzQ2MCwiaWF0IjoxNzQ1NzE3MDYwLCJpc3MiOiJiZS1kZWxpdmVyeS1nYXRld2F5In0.ANqRp_Xnn-33CCwkm7vzLFvgnkAMGnbLEhPU7mH7CYg',
+      'content-type': 'application/json'
+
+    }
+
+    response = requests.request("POST", url, headers=headers, data=payload)
+
+    data = json.loads(response.text)
+    return data
+  
